@@ -1,5 +1,7 @@
 tags = [
-	"DEVELOP",
+	"HERO",
+	"NBK",
+	"MG"	
 ];
 
 function set(a, b) {
@@ -24,8 +26,8 @@ options = {
 	'lowergph': false,
 	'skinrotator': false,
 	'background': '',
-	'nick': 'Deplex',
-	'clantag': 'Develop',
+	'nick': '',
+	'clantag': '',
 	'drawfood': false,
 	'drawfoodsize': 1,
 	'drawfoodcolor': 1,
@@ -199,7 +201,7 @@ function addOptions() {
 	jQuery("#custombg").click(function() {
 		if (jQuery(this).attr('class') == 'on') {
 			options.custombg = false;
-			url = prompt('Enter Image URL:', '');
+			url = prompt('Enter new URL (image):', '');
 			if (url && url.length > 10) {
 				options.custombg = true;
 				options.background = url;
@@ -223,22 +225,23 @@ function addOptions() {
 	
 	jQuery("#tag").val(options.clantag);
 	jQuery("#nick").val(options.nick);
-	$("#options").append('<label id="showshortcuts" class="on" style="text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px; width:100%">Show Shortcuts</label>');
-	$("#options").append('<label id="showchat" class="on" style="text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px; width:100%">Show Chat</label>');
+	$("#options").append('<label id="showshortcuts" class="on" style="text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px; width:100%">Show shortcuts</label>');
+	$("#options").append('<label id="showchat" class="on" style="text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px; width:100%">Show chat</label>');
 	$("body").append('<div id="shortcuts" style="display:none;z-index:999;width: 260px; color: rgb(128, 88, 208); border-radius: 29px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; font-size: 14px; margin: 0px auto 100px; padding: 10px 14px; background-color: rgba(30, 38, 46,0.7);position:absolute;top:50px;left:6px;"><ul style="list-style-type:none;padding:0;"><li>[F] - switch drawing mode</li><li>[G] - change color of drawing</li><li>[H] - change size of drawing</li><li>[J] - crazy drawing</li><li>[E] - previous skin</li><li>[R] - next skin</li><li>[Q] - quit</li><li>[ESC] - respawn</li><li>[SHIFT] - accelerate</li><li>[1-6] - switching options</li></ul></div>');
 	$("body").append('<div id="chat" style="display:none;z-index:999; width: 260px; height: 270px; color: rgb(128, 88, 208); border-radius: 29px; font-family: \'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif; font-size: 14px; padding: 10px 14px; background-color: rgba(30, 38, 46,0.7);position:absolute;bottom:110px;left:6px;"><div id="chatMessages" style="height:200px"></div><div id="yourMessage_holder" class="taho" style="width: 100%; height: 35px; margin-top: 10px; box-shadow: rgb(0, 0, 0) 0px 6px 50px; opacity: 1; background: rgb(76, 68, 124);"><input class="sumsginp" id="yourMessage" placeholder="Press [ENTER] to chat" style="width: 100%; top: 0px; outline: 0; height: 35px; padding: 10px; left:0; border-radius:29px;font-size:14px" /></div></div>');
 	$("#showshortcuts").click(function() {
 			if (jQuery(this).attr('class') == 'on') {
 				jQuery(this).attr('class', 'off');
-				jQuery(this).html('Hide Shortcuts');
+				jQuery(this).html('Hide shortcuts');
 				set(jQuery(this).attr('id'), false);
 				$("iframe").attr('src','data:html,');
 				$("#shortcuts").show();
 				options['showshortcuts'] = true;
 			} else {
 				jQuery(this).attr('class', 'on');
-				jQuery(this).html('Show Shortcuts');
+				jQuery(this).html('Show shortcuts');
 				set(jQuery(this).attr('id'), true);
+				$("iframe").attr('src','http://slitherplus.io/social.html');
 				$("#shortcuts").hide();
 				options['showshortcuts'] = false;
 			}
@@ -246,12 +249,12 @@ function addOptions() {
 	$("#showchat").click(function() {
 			if (jQuery(this).attr('class') == 'on') {
 				jQuery(this).attr('class', 'off');
-				jQuery(this).html('Hide Chat');
+				jQuery(this).html('Hide chat');
 				$("#chat").show();
 				options['chat'] = true;
 			} else {
 				jQuery(this).attr('class', 'on');
-				jQuery(this).html('Show Chat');
+				jQuery(this).html('Show chat');
 				$("#chat").hide();
 				options['chat'] = false;
 			}
@@ -420,7 +423,7 @@ function showFPS() {
 
 function loop() {
 	if (typeof lbh != "undefined") {
-		lbh.textContent = "slither.io";
+		lbh.textContent = "slitherplus.io";
 	}
 	
 	if (typeof bso != "undefined" && $("#ipAddress").html() != (bso.ip + ":" + bso.po)) {
@@ -431,10 +434,10 @@ function loop() {
 	setTimeout(loop, 1000);
 }
 
-$("body").append('<div id="ipBox" style="position:fixed;bottom: 120px; right: 20px; color: lightgray; z-index:99999999;">IP: <span id="ipAddress">play first</span> <label style="float: right;text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px;width: 140px; margin-left: 10px;" id="ip-connect" class="on">Connect to an IP</label></div>');
+$("body").append('<div id="ipBox" style="position:fixed;bottom: 120px; right: 20px; color: lightgray; z-index:99999999;">IP: <span id="ipAddress">play first</span> <label style="float: right;text-align: center; border-radius: 12px; color: white; cursor: pointer; padding: 0px 20px;width: 140px; margin-left: 10px;" id="ip-connect" class="on">Connect to IP</label></div>');
 
 $("#ip-connect").click(function() {
-	eipaddr = prompt('IP Address:', '');
+	eipaddr = prompt('Enter the IP address:', '');
 	if (eipaddr && eipaddr.indexOf(":") != -1 && eipaddr.indexOf(".") != -1) {
 		forceServer(eipaddr.split(":")[0], eipaddr.split(":")[1]);
 		connect();
@@ -491,7 +494,7 @@ function addSkins() {
             [10, 10, 19, 19, 10, 10, 20, 20],                               // Luxury
 			[10, 10],                               // Luxury2
 			[20, 20],                               // Luxury3
-            [12, 11, 14],                                                   // Bee
+            [12, 11, 11],                                                   // Bee
             [7, 7, 9, 13, 13, 9, 16, 16, 9, 12, 12, 9, 7, 7, 9, 16, 16, 9], // Google
             [7, 7, 9, 9, 6, 6, 9, 9],                                       // Candy
             [16, 16, 9, 9, 15, 15, 9, 9],                                   // Candy (Blue)
@@ -558,25 +561,25 @@ function deleteMessages() {
 chatWebSocket = new WebSocket("ws://51.254.206.49:1337");
 chatWebSocket.onopen = function() {
 	$(".chatMessage").remove();
-	$("#chatMessages").append('<div class="chatMessage"><span style="color:green;">Talk to your friends!</span></div>');
+	$("#chatMessages").append('<div class="chatMessage"><span style="color:green;">Welcome to the chat!</span></div>');
 };
 chatWebSocket.onmessage = function(msg) {
 	$("#chatMessages").append(msg.data);
 	deleteMessages();
 };
 chatWebSocket.onerror = function(err) {
-	$("#chatMessages").append('<div class="chatMessage"><span style="color:orange;">Got an error!</span></div>');
+	$("#chatMessages").append('<div class="chatMessage"><span style="color:orange;">Got an error.</span></div>');
 	deleteMessages();
 };
 chatWebSocket.onclose = function() {
-	$("#chatMessages").append('<div class="chatMessage"><span style="color:red;">Chat has closed!</span></div>');
+	$("#chatMessages").append('<div class="chatMessage"><span style="color:red;">Chat closed.</span></div>');
 	deleteMessages();
 };
 
 $("#playh .btnt.nsi.sadg1").click(function() {
 	setTimeout(function(ip){
 		if ((!ws || ws.readyState != ws.OPEN) && window.bso.ip == ip) {
-			alert("Server is full! Looking for a new one...");
+			alert("Server is full! Looking for a new server...");
 			document.location.href = "http://slither.io/";
 		}
 	}, 10000, bso.ip);
